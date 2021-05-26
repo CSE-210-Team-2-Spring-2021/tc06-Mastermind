@@ -12,7 +12,7 @@ mastermind.py - Kyle Ames
 		compare(self, guess(list))
 			 Responsible for comparing the guess and code and returning the hint value
 			 
-		hint(self)
+		hint(self, players)
 			 Using compare return a str output with player guesses and hints
 			 Example of string:
 				-------------------------
