@@ -1,0 +1,53 @@
+mastermind.py - Kyle Ames
+	Responsible for generating code/comparing guess/checking if the game is won
+	Methods:
+		__init__(self)
+			Constructor
+			Attributes:
+				_code_list - []
+		
+		_prepare(self)
+			Generate the secret code turn it into a list
+			
+		compare(self, guess(list))
+			 Responsible for comparing the guess and code and returning the hint value
+			 
+		hint(self)
+			 Using compare return a str output with player guesses and hints
+			 Example of string:
+				-------------------------
+				Player Matt: 9452, XXO*
+				Player John: 5490, OXO*
+				-------------------------
+				
+		is_won(self)
+			Responsible for seeing if the guess matches the code, if so return boolean True
+		
+
+console.py  --unchanged
+
+director.py - Lucas
+	This will need some alteration namely in get_inputs and do outputs
+
+turn.py  (instead of move.py) Chase Patterson
+	Responsible for tracking the player turn, converts int guess to list and returns list
+	Methods:
+		__init__(self,guess)
+			Constructor
+			Attributes:
+				_guess = guess
+				_guess_list = []
+				
+			to_list()
+			
+		to_list(self)
+			_guess_list = Converted guess into a list
+		
+		get_list(self)
+			returns _guess_list
+			
+
+player.py  --unchanged
+
+roster.py
+	Add a get_players method
