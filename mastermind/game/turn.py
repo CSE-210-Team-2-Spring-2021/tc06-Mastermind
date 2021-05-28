@@ -1,23 +1,31 @@
 class Turn:
-    """A maneuver in the game. The responsibility of Move is to keep track of the stones to remove and which pile to remove them from.
+    """ A maneuver in the game. The responsibility of Move is to keep track of the stones to remove and which pile to remove them from.
 
-    Stereotype: 
-        Information Holder
+        Stereotype: 
+            Information Holder
 
-    Attributes:
-        _guess(integer): The player's guess
-        _guess_list (list): _guess converted to a list
+        Attributes:
+            _guess(integer): The player's guess
+            _guess_list (list): _guess converted to a list
     """
 
     def __init__(self, guess):
-        """The class constructor.
+        """ The class constructor.
 
-        Args:
-            self (Board): an instance of Board.
+            Args:
+                self (Board): an instance of Board.
         """
+        self._guess = guess
+        self._guess_list = []
 
     def to_list(self):
-        """Converts the players guess into a list, sets _guess_list equal to it"""
+        """ Converts the players guess into a list, sets _guess_list equal to it
+
+            Args:
+                self (Turn): an instance of Turn.
+        """
+        self._guess = list(self._guess_list.split(" "))
+        return self._guess
 
     def get_turn(self):
         """Returns the number of stones to remove.
@@ -25,3 +33,4 @@ class Turn:
         Args:
             self (Turn): an instance of Turn.
         """
+        return self._guess_list
