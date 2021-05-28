@@ -46,5 +46,6 @@ root                    (project root folder)
 
 ---
 
-- # TODO: Add your names and emails here
-  Chase Patterson (pat20001@byui.edu)
+* # TODO: Add your names and emails here
+Kyle Ames - ame18007@byui.edu
+Chase Patterson (pat20001@byui.edu)

@@ -4,8 +4,10 @@ import random
 class Mastermind:
     """ This is the designated playing "surface".
 
+
         Stereotype:
         Information holder
+
 
         Attributes:
             _code_list - list of numbers
