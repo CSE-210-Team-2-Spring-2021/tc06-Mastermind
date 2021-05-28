@@ -5,6 +5,7 @@ class Mastermind:
 
     Stereotype:
     Information holder
+    Service Provider
 
     Attributes:
         _code_list - list of numbers"""
@@ -12,24 +13,66 @@ class Mastermind:
     def __init__(self):
         """Constructor
         Args:
-            self - an instance of Board"""
+            self - an instance of mastermind"""
 
+        # initialize variables
+        self._code_list = []
+        self._prepare()
     
     def _prepare(self):
-        """Generate the secret code and turn it into a list"""
+        """Generate the secret code and turn it into a list
+        Args
+            self - an instance of mastermind"""
+        code = str(random.randint(1000, 10000))
+        self._code_list.append(code)
 
-    def compare(self, guess_list):
-        """Responsible for comparing the guess and code and returning the hint value(list)"""
+    def compare(self, guess_list, code):
+        """Responsible for comparing the guess and code and returning the hint value(list)
+        Args
+            self - an instance of mastermind
+            guess_list - a list with str contained guess
+        Returns
+            hint_value - a list with str contained hint"""
+        guess = self.turn.to_list(guess_list)
+        self._code_list.append(guess)
+        hint = "****"
+        self._code_list.append(hint)
+
+        for i, number in enumerate(guess):
+            if code[i] == number:
+                hint += "x"
+            elif number in code:
+                hint += "o"
+            else:
+                hint += "*"
+        return hint
         
-    def hint(self, players):
+    def _get_hint(self, players):
         """Using compare return a str output with player guesses and hints
-			 Example of string:
-				-------------------------
-				Player Matt: 9452, XXO*
-				Player John: 5490, OXO*
-				-------------------------
+		Args
             players -  a list of player objects that will be passed in from director,
-            here for the get_name and get_move functions"""
+            here for the get_name and get_move functions
+        Returns
+            output - a str with players, their guesses, and applicable hints"""
+        hint = self.compare()
+
+        output = "\n--------------------"
+        for i, name in enumerate(players):
+            output += (f'Player {players[i]}: '+'{guess}, '+'{hint}')
+        output += "\n--------------------"
+         
+        return output
+
 
     def is_won(self, guess_list):
-        """Responsible for seeing if the guess matches the code, if so return boolean True, otherwise False"""
+        """Responsible for seeing if the guess matches the code, if so return boolean True, 
+        otherwise False
+        Args
+            self - an instance of mastermind
+        Returns 
+            bool - True if guess_list matches _code_list, otherwise False"""
+        
+        if guess_list == self._code_list:
+            return True
+        else:
+            return False
