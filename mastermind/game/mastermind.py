@@ -1,78 +1,89 @@
 import random
 
+
 class Mastermind:
-    """This is the designated playing "surface".
+    """ This is the designated playing "surface".
 
-    Stereotype:
-    Information holder
-    Service Provider
 
-    Attributes:
-        _code_list - list of numbers"""
+        Stereotype:
+        Information holder
+
+
+        Attributes:
+            _code_list - list of numbers
+    """
 
     def __init__(self):
-        """Constructor
-        Args:
-            self - an instance of mastermind"""
+        """ Constructor, initializes the variables.
 
-        # initialize variables
+            Args:
+                self - an instance of Mastermind
+        """
+
         self._code_list = []
         self._prepare()
-    
-    def _prepare(self):
-        """Generate the secret code and turn it into a list
-        Args
-            self - an instance of mastermind"""
+
+    def _prepare(self, player):
+        """ Generate the secret code and turn it into a list
+
+            Args:
+                self - an instance of Mastermind
+        """
+        name = player.get_name()
         code = str(random.randint(1000, 10000))
-        self._code_list.append(code)
-
-    def compare(self, guess_list, code):
-        """Responsible for comparing the guess and code and returning the hint value(list)
-        Args
-            self - an instance of mastermind
-            guess_list - a list with str contained guess
-        Returns
-            hint_value - a list with str contained hint"""
-        guess = self.turn.to_list(guess_list)
-        self._code_list.append(guess)
+        guess = "----"
         hint = "****"
-        self._code_list.append(hint)
+        self._items[name] = [code, guess, hint]
 
-        for i, number in enumerate(guess):
-            if code[i] == number:
+    def compare(self, code, guess):
+        """ Responsible for comparing the guess with the code and returning the hint value(list)
+
+            Args:
+                self (Mastermind): an instance of Mastermind
+                code (string): The code to compare with
+                guess (string): The guess that made
+
+            Returns:
+            string: A hint with the form of [xxxx]
+        """
+        hint = ""
+        for turn, letter in enumerate(guess):
+            if code[turn] == letter:
                 hint += "x"
-            elif number in code:
+            elif letter in code:
                 hint += "o"
             else:
                 hint += "*"
         return hint
-        
-    def hint(self, players):
-        """Using compare return a str output with player guesses and hints
-		Args
+
+    def display(self, player, turn):
+        """ Using compare return a str output with player guesses and hints.
+
+            Args:
+                self - an instance of Mastermind
+
+            Example of string:
+            -------------------------
+            Player Matt: 9452, XXO*
+            Player John: 5490, OXO*
+            -------------------------
             players -  a list of player objects that will be passed in from director,
-            here for the get_name and get_move functions
-        Returns
-            output - a str with players, their guesses, and applicable hints"""
-        hint = self.compare()
+            here for the get_name and get_turn functions
+        """
+        player = player.get_name()
+        guess = turn.get_turn()
+        hint = 0
+        text = "\n-------------------------"
+        text += f"\nPlayer {player}: " + "{}, " * guess + "{}" * hint
+        text += f"\nPlayer {player}: "
+        text = "\n-------------------------"
+        return text
 
-        output = "\n--------------------"
-        for i, name in enumerate(players):
-            output += (f'Player {players[i]}: '+'{guess}, '+'{hint}')
-        output += "\n--------------------"
-         
-        return output
+    def is_won(self):
+        """ Responsible for seeing if the guess matches the code, if so return boolean True, otherwise False
 
-
-    def is_won(self, guess_list):
-        """Responsible for seeing if the guess matches the code, if so return boolean True, 
-        otherwise False
-        Args
-            self - an instance of mastermind
-        Returns 
-            bool - True if guess_list matches _code_list, otherwise False"""
-        
-        if guess_list == self._code_list:
-            return True
-        else:
-            return False
+            Args:
+                self - an instance of Mastermind
+        """
+        won = ["*"] * len(self._code_list)
+        return self._code_list == won
