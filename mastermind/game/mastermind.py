@@ -47,7 +47,7 @@ class Mastermind:
                 hint += "*"
         return hint
         
-    def _get_hint(self, players):
+    def hint(self, players):
         """Using compare return a str output with player guesses and hints
 		Args
             players -  a list of player objects that will be passed in from director,
