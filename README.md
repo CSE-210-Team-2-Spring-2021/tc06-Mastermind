@@ -35,3 +35,4 @@ root                    (project root folder)
 ## Authors
 ---
 * # TODO: Add your names and emails here
+Kyle Ames - ame18007@byui.edu
