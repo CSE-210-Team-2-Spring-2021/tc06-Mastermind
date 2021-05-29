@@ -58,7 +58,7 @@ class Mastermind:
         output = "\n--------------------"
         for i, name in enumerate(players):
             player = self.player.get_name()
-            guess = self.player.get_move()
+            guess = self.player.get_turn()
             hint_list = self.compare()
             for symbol in hint_list:
                 hint += symbol 
