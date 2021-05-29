@@ -23,28 +23,27 @@ class Mastermind:
         """Generate the secret code and turn it into a list
         Args
             self - an instance of mastermind"""
-        code = str(random.randint(1000, 10000))
-        self._code_list.append(code)
+        code = str(random.randint(1000, 9999))
+        self._code_list = [int(x) for x in str(code)]
 
-    def compare(self, guess_list, code):
+    def compare(self, guess_list):
         """Responsible for comparing the guess and code and returning the hint value(list)
         Args
             self - an instance of mastermind
             guess_list - a list with str contained guess
         Returns
             hint_value - a list with str contained hint"""
-        guess = self.turn.to_list(guess_list)
-        self._code_list.append(guess)
-        hint = "****"
-        self._code_list.append(hint)
+        guess = guess_list
+        code = self._code_list
+        hint = ["*","*","*","*"]
 
         for i, number in enumerate(guess):
             if code[i] == number:
-                hint += "x"
+                hint[i] = "x"
             elif number in code:
-                hint += "o"
+                hint[i] = "o"
             else:
-                hint += "*"
+                hint[i] = "*"
         return hint
         
     def hint(self, players):
@@ -54,11 +53,13 @@ class Mastermind:
             here for the get_name and get_move functions
         Returns
             output - a str with players, their guesses, and applicable hints"""
-        hint = self.compare()
-
+        
         output = "\n--------------------"
         for i, name in enumerate(players):
-            output += (f'Player {players[i]}: '+'{guess}, '+'{hint}')
+            player = self.player.get_name()
+            guess = self.player.get_move()
+            hint = self.hint
+            output += (f'Player {player}: ' + '{guess}, ' + '{hint}')
         output += "\n--------------------"
          
         return output
