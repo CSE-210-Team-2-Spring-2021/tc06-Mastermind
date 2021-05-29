@@ -13,11 +13,12 @@ class Director:
         Controller
 
     Attributes:
-        board (Hunter): An instance of the class of objects known as Board.
+        mastermind (Hunter): An instance of the class of objects known as Board.
         console (Console): An instance of the class of objects known as Console.
-        keep_playing (boolean): Whether or not the game can continue.
-        move (Rabbit): An instance of the class of objects known as Move.
         roster (Roster): An instance of the class of objects known as Roster.
+        player (Player): An instance of the class of objects known as Player.
+        turn (Guess): An instance of the class of objects known as Turn.
+        keep_playing (boolean): Whether or not the game can continue.
     """
 
     def __init__(self):
@@ -26,11 +27,13 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._board = Board()
+        self._mastermind = Mastermind()
         self._console = Console()
+        self._roster = Roster()
+        self._player = Player()
+        self._turn = Turn()
         self._keep_playing = True
         self._move = None
-        self._roster = Roster()
 
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -41,7 +44,7 @@ class Director:
         self._prepare_game()
         while self._keep_playing:
             self._get_inputs()
-            self._do_updates()
+           # self._do_updates()
             self._do_outputs()
 
     def _prepare_game(self):
@@ -53,6 +56,7 @@ class Director:
         for n in range(2):
             name = self._console.read(f"Enter a name for player {n + 1}: ")
             player = Player(name)
+            self._player.set_move('----')
             self._roster.add_player(player)
 
     def _get_inputs(self):
@@ -63,37 +67,28 @@ class Director:
             self (Director): An instance of Director.
         """
         # display the game board
-        board = self._board.to_string()
+        board = self._mastermind.hint(self._roster.get_players())
         self._console.write(board)
         # get next player's move
         player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn:")
-        pile = self._console.read_number("What pile to remove from? ")
-        stones = self._console.read_number("How many stones to remove? ")
-        move = Move(stones, pile)
-        player.set_move(move)
+        guess = self._console.read_number("What is your guess? ")
+        turn = self._turn(guess)
+        player.set_turn(turn)
 
-    def _do_updates(self):
-        """Updates the important game information for each round of play. In 
-        this case, that means updating the board with the current move.
-
-        Args:
-            self (Director): An instance of Director.
-        """
-        player = self._roster.get_current()
-        move = player.get_move()
-        self._board.apply(move)
-
+    
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
-        this case, that means checking if there are stones left and declaring the winner.
+        this case, that means checking if guess is equals to the secret number.
 
         Args:
             self (Director): An instance of Director.
         """
-        if self._board.is_empty():
+        self._player
+        if self._mastermind.is_won(self._player.get_turn()):
             winner = self._roster.get_current()
             name = winner.get_name()
             print(f"\n{name} won!")
             self._keep_playing = False
-        self._roster.next_player()
+        else:
+            self._roster.next_player()
