@@ -56,13 +56,13 @@ class Mastermind:
         hint = ""
 
         output = "\n--------------------"
-        for i, name in enumerate(players):
-            player = self.player.get_name()
-            guess = self.player.get_turn()
+        for player in players:
+            name = player.get_name()
+            guess = player.get_turn()
             hint_list = self.compare()
             for symbol in hint_list:
                 hint += symbol 
-            output += (f'Player {player}: ' + '{guess}, ' + '{hint}')
+            output += (f'Player {name}: ' + f'{guess}, ' + f'{hint}')
         output += "\n--------------------"
          
         return output
