@@ -54,14 +54,19 @@ class Mastermind:
         Returns
             output - a str with players, their guesses, and applicable hints"""
         hint = ""
-
+        guess = ""
         output = "\n--------------------"
         for player in players:
             name = player.get_name()
-            guess = player.get_turn()
-            hint_list = self.compare()
+            turn = player.get_turn()
+            guess_list = turn.get_turn()
+            hint_list = self.compare(guess_list)
+
+            for item in guess_list:
+                guess += str(item)
             for symbol in hint_list:
                 hint += symbol 
+
             output += (f'Player {name}: ' + f'{guess}, ' + f'{hint}')
         output += "\n--------------------"
          
