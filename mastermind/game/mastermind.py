@@ -53,12 +53,15 @@ class Mastermind:
             here for the get_name and get_move functions
         Returns
             output - a str with players, their guesses, and applicable hints"""
-        
+        hint = ""
+
         output = "\n--------------------"
         for i, name in enumerate(players):
             player = self.player.get_name()
-            guess = self.player.get_move()
-            hint = self.hint
+            guess = self.player.get_turn()
+            hint_list = self.compare()
+            for symbol in hint_list:
+                hint += symbol 
             output += (f'Player {player}: ' + '{guess}, ' + '{hint}')
         output += "\n--------------------"
          
