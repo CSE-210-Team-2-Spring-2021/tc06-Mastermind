@@ -30,8 +30,6 @@ class Director:
         self._mastermind = Mastermind()
         self._console = Console()
         self._roster = Roster()
-        self._player = Player()
-        self._turn = Turn()
         self._keep_playing = True
         self._move = None
 
@@ -56,7 +54,7 @@ class Director:
         for n in range(2):
             name = self._console.read(f"Enter a name for player {n + 1}: ")
             player = Player(name)
-            self._player.set_move('----')
+            player.set_move('----')
             self._roster.add_player(player)
 
     def _get_inputs(self):
@@ -73,7 +71,7 @@ class Director:
         player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn:")
         guess = self._console.read_number("What is your guess? ")
-        turn = self._turn(guess)
+        turn = Turn(guess)
         player.set_turn(turn)
 
     
@@ -84,7 +82,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._player
+
         if self._mastermind.is_won(self._player.get_turn()):
             winner = self._roster.get_current()
             name = winner.get_name()
