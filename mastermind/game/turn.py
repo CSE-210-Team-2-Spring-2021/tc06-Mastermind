@@ -24,7 +24,7 @@ class Turn:
             Args:
                 self (Turn): an instance of Turn.
         """
-        self._guess = map(int, self._guess)
+        self._guess = map(int, str(self._guess))
         self._guess_list = list(self._guess)
         return self._guess_list
 
