@@ -72,7 +72,7 @@ class Director:
         self._console.write(f"{player.get_name()}'s turn:")
         guess = self._console.read_number("What is your guess? ")
         turn = Turn(guess)
-        player.set_turn(turn)
+        player.set_move(turn)
 
     
     def _do_outputs(self):
@@ -82,8 +82,8 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-
-        if self._mastermind.is_won(self._player.get_turn()):
+        player = self._roster.get_current()
+        if self._mastermind.is_won(player.get_turn()):
             winner = self._roster.get_current()
             name = winner.get_name()
             print(f"\n{name} won!")
