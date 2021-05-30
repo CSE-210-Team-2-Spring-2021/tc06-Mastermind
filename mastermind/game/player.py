@@ -34,7 +34,7 @@ class Player:
         """
         return self._name
 
-    def set_move(self, turn):
+    def set_turn(self, turn):
         """Sets the player's last move to the given instance of Move.
 
         Args:
