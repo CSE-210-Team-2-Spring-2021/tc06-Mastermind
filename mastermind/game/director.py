@@ -57,6 +57,8 @@ class Director:
             turn = Turn('----')
             player.set_turn(turn)
             self._roster.add_player(player)
+        
+        self._roster.next_player()
 
     def _get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -84,7 +86,8 @@ class Director:
             self (Director): An instance of Director.
         """
         player = self._roster.get_current()
-        if self._mastermind.is_won(player.get_turn()):
+        turn = player.get_turn()
+        if self._mastermind.is_won(turn.get_turn()):
             winner = self._roster.get_current()
             name = winner.get_name()
             print(f"\n{name} won!")

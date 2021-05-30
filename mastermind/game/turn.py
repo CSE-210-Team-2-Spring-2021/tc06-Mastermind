@@ -18,14 +18,16 @@ class Turn:
         self._guess = guess
         self._guess_list = []
 
+        self.to_list()
+
     def to_list(self):
         """ Converts the players guess into a list, sets _guess_list equal to it
 
             Args:
                 self (Turn): an instance of Turn.
         """
-        self._guess = map(int, str(self._guess))
-        self._guess_list = list(self._guess)
+        
+        self._guess_list = [str(x) for x in str(self._guess)]
         return self._guess_list
 
     def get_turn(self):

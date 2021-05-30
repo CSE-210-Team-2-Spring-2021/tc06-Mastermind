@@ -24,7 +24,7 @@ class Mastermind:
         Args
             self - an instance of mastermind"""
         code = str(random.randint(1000, 9999))
-        self._code_list = [int(x) for x in str(code)]
+        self._code_list = [str(x) for x in str(code)]
 
     def compare(self, guess_list):
         """Responsible for comparing the guess and code and returning the hint value(list)
@@ -53,10 +53,11 @@ class Mastermind:
             here for the get_name and get_move functions
         Returns
             output - a str with players, their guesses, and applicable hints"""
-        hint = ""
-        guess = ""
+        
         output = "\n--------------------\n"
         for player in players:
+            hint = ""
+            guess = ""
             name = player.get_name()
             turn = player.get_turn()
             guess_list = turn.get_turn()
