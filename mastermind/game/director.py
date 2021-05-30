@@ -53,8 +53,9 @@ class Director:
         """
         for n in range(2):
             name = self._console.read(f"Enter a name for player {n + 1}: ")
-            player = Player(name)
-            player.set_move('----')
+            player = Player(name) 
+            turn = Turn('----')
+            player.set_turn(turn)
             self._roster.add_player(player)
 
     def _get_inputs(self):
@@ -72,7 +73,7 @@ class Director:
         self._console.write(f"{player.get_name()}'s turn:")
         guess = self._console.read_number("What is your guess? ")
         turn = Turn(guess)
-        player.set_move(turn)
+        player.set_turn(turn)
 
     
     def _do_outputs(self):
