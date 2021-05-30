@@ -49,3 +49,4 @@ root                    (project root folder)
 * # TODO: Add your names and emails here
 Kyle Ames - ame18007@byui.edu
 Chase Patterson (pat20001@byui.edu)
+TJ Anderson - and15126@byui.edu
